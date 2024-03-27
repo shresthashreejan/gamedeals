@@ -1,7 +1,9 @@
 export default function Navbar() {
     return (
         <>
-            <nav className="flex justify-center">Game Deals</nav>
+            <nav>
+                <h1 className="flex justify-center">Game Deals</h1>
+            </nav>
         </>
     );
 }

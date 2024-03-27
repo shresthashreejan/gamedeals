@@ -6,3 +6,8 @@
     font-family: "IBM Plex Mono", monospace;
     font-weight: 400;
 }
+
+h1 {
+    font-family: "Press Start 2P", system-ui;
+    font-weight: 400;
+}
