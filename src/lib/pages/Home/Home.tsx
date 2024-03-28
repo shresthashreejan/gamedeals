@@ -1,4 +1,7 @@
 import { useState } from "react";
+import FreeGameDeals from "../FreeGameDeals/FreeGameDeals";
+import FreeToPlay from "../FreeToPlay/FreeToPlay";
+import GameRecommendation from "../GameRecommendation/GameRecommendation";
 import Navbar from "../../components/Navbar";
 import Tabs from "../../components/Tabs";
 import ThemeToggle from "../../components/ThemeToggle";
@@ -23,9 +26,21 @@ const Home = () => {
                     <Tabs activeTab={activeTab} onTabChange={handleTabChange} />
                 </div>
                 <section className="mt-12">
-                    {activeTab === 0 && <div>Free Game Deals</div>}
-                    {activeTab === 1 && <div>Free To Play Games</div>}
-                    {activeTab === 2 && <div>Game Recommendation</div>}
+                    {activeTab === 0 && (
+                        <div>
+                            <FreeGameDeals />
+                        </div>
+                    )}
+                    {activeTab === 1 && (
+                        <div>
+                            <FreeToPlay />
+                        </div>
+                    )}
+                    {activeTab === 2 && (
+                        <div>
+                            <GameRecommendation />
+                        </div>
+                    )}
                 </section>
             </main>
             <div className="flex justify-center">
