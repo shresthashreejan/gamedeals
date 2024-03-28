@@ -7,7 +7,7 @@ const options = {
     url: url,
 };
 
-export async function fetchFreeGames(): Promise<[]> {
+export async function fetchFreeGameDeals(): Promise<[]> {
     let data = [];
     const storedData = localStorage.getItem("freeGames");
     if (storedData) {

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchFreeGames } from "../../utils/FetchFreeGameDeals";
+import { fetchFreeGameDeals } from "../../utils/FetchFreeGameDeals";
 
 interface Deal {
     data: {
@@ -10,7 +10,7 @@ interface Deal {
 const FreeGameDeals = () => {
     const [deals, setDeals] = useState<Deal[]>([]);
     useEffect(() => {
-        fetchFreeGames().then((data) => {
+        fetchFreeGameDeals().then((data) => {
             setDeals(data);
         });
     }, []);
