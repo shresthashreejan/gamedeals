@@ -1,29 +1,33 @@
 import { useEffect, useState } from "react";
 import { fetchFreeGameDeals } from "../../utils/FetchFreeGameDeals";
+import Card from "../../components/Card";
 
 interface Deal {
-    data: {
-        title: string;
-    };
+    title: string;
+    image: string;
+    platforms: string;
+    open_giveaway: string;
+    end_date: string;
+    worth: string;
 }
 
 const FreeGameDeals = () => {
     const [deals, setDeals] = useState<Deal[]>([]);
     useEffect(() => {
         fetchFreeGameDeals().then((data) => {
-            setDeals(data);
+            if (data) {
+                setDeals(data);
+            }
         });
     }, []);
     return (
         <>
-            <div>
-                {deals
-                    .slice(2)
-                    .slice(0, 10)
-                    .map((deal, index) => (
-                        <div key={index}>{deal.data.title}</div>
-                    ))}
-            </div>
+            {deals.length > 0 &&
+                deals.slice(0, 10).map((deal, index) => (
+                    <div key={index} className="mb-8">
+                        <Card deal={deal} />
+                    </div>
+                ))}
         </>
     );
 };

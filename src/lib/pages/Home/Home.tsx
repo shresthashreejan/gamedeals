@@ -43,9 +43,7 @@ const Home = () => {
                     )}
                 </section>
             </main>
-            <div className="flex justify-center">
-                <Footer />
-            </div>
+            <div className="flex justify-center">{/* <Footer /> */}</div>
         </>
     );
 };
