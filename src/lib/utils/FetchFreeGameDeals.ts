@@ -21,11 +21,17 @@ const options = {
 
 export async function fetchFreeGameDeals(): Promise<[]> {
     let data = [];
-    try {
-        const response = await axios.request(options);
-        data = response.data;
-    } catch (error) {
-        console.error("Error fetching data:", error);
+    const storedData = localStorage.getItem("freeGameDeals");
+    if (storedData) {
+        data = JSON.parse(storedData);
+    } else {
+        try {
+            const response = await axios.request(options);
+            data = response.data;
+            localStorage.setItem("freeGameDeals", JSON.stringify(data));
+        } catch (error) {
+            console.error("Error fetching data:", error);
+        }
     }
 
     return data;

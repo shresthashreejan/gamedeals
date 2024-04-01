@@ -1,16 +1,18 @@
+import { useState, useEffect } from "react";
+
 interface Deal {
     title: string;
-    image: string;
-    platforms: string;
-    open_giveaway: string;
-    end_date: string;
-    worth: string;
+    platform: string;
+    game_url: string;
+    thumbnail: string;
 }
 
-const Card = ({ deal }: { deal: Deal }) => {
+const Card_F2P = ({ deal }: { deal: Deal }) => {
+    const [imageLoaded, setImageLoaded] = useState(false);
+
     let platformsArray;
-    if (deal.platforms) {
-        platformsArray = deal.platforms
+    if (deal.platform) {
+        platformsArray = deal.platform
             .split(",")
             .map((platform) => platform.trim());
     }
@@ -19,20 +21,32 @@ const Card = ({ deal }: { deal: Deal }) => {
         window.open(url, "_blank");
     }
 
+    useEffect(() => {
+        const img = new Image();
+        img.src = deal.thumbnail;
+        img.onload = () => {
+            setImageLoaded(true);
+        };
+    }, [deal.thumbnail]);
+
     return (
         <>
-            <div className="card lg:card-side bg-base-100 border-2 border-neutral p-4">
+            <div className="card w-96 bg-base-100 shadow-xl">
                 <figure>
-                    <img
-                        src={deal.image}
-                        alt="Cover Image"
-                        className=" rounded-xl"
-                    />
+                    {!imageLoaded && (
+                        <div className="skeleton w-[365px] h-[206px] shrink-0"></div>
+                    )}
+                    {imageLoaded && (
+                        <img
+                            src={deal.thumbnail}
+                            alt="Cover Image"
+                            className={"rounded-xl"}
+                        />
+                    )}
                 </figure>
                 <div className="card-body flex flex-col justify-center">
-                    <h2 className="card-title">{deal.title}</h2> <div></div>
+                    <h2 className="card-title">{deal.title}</h2>
                     <div className="flex flex-wrap gap-1">
-                        {" "}
                         {platformsArray &&
                             platformsArray.map((platform, index) => (
                                 <div
@@ -43,24 +57,14 @@ const Card = ({ deal }: { deal: Deal }) => {
                                 </div>
                             ))}
                     </div>
-                    <div>
-                        {deal.worth !== "N/A"
-                            ? `Original Price: ${deal.worth}`
-                            : null}
-                    </div>
-                    <div>
-                        {deal.end_date !== "N/A"
-                            ? `Ends: ${deal.end_date}`
-                            : null}
-                    </div>
                     <div className="card-actions justify-start">
                         <button
                             className="btn btn-primary mt-4"
                             onClick={() => {
-                                redirectTo(deal.open_giveaway);
+                                redirectTo(deal.game_url);
                             }}
                         >
-                            Claim
+                            Play
                         </button>
                     </div>
                 </div>
@@ -69,4 +73,4 @@ const Card = ({ deal }: { deal: Deal }) => {
     );
 };
 
-export default Card;
+export default Card_F2P;

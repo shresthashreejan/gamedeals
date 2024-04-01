@@ -8,7 +8,7 @@ const options = {
     method: "GET",
     url: url,
     params: {
-        "sort-by": "relevance",
+        "sort-by": "popularity",
     },
     headers: {
         "X-RapidAPI-Key": key,

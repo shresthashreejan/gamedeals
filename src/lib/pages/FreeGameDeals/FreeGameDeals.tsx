@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { fetchFreeGameDeals } from "../../utils/FetchFreeGameDeals";
-import Card from "../../components/Card";
+import Card_FGD from "../../components/Card_FGD";
 
 interface Deal {
     title: string;
@@ -12,20 +12,29 @@ interface Deal {
 }
 
 const FreeGameDeals = () => {
+    const [loading, setLoading] = useState(true);
     const [deals, setDeals] = useState<Deal[]>([]);
     useEffect(() => {
         fetchFreeGameDeals().then((data) => {
             if (data) {
                 setDeals(data);
             }
+            setLoading(false);
         });
     }, []);
     return (
         <>
-            {deals.length > 0 &&
-                deals.slice(0, 10).map((deal, index) => (
+            {loading && (
+                <div className="spinner">
+                    <span className="loading loading-ring w-24 "></span>
+                </div>
+            )}
+            {!loading && deals.length === 0 && <p>No games found.</p>}
+            {!loading &&
+                deals.length > 0 &&
+                deals.map((deal, index) => (
                     <div key={index} className="mb-8">
-                        <Card deal={deal} />
+                        <Card_FGD deal={deal} />
                     </div>
                 ))}
         </>
