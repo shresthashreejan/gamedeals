@@ -16,7 +16,7 @@ const FreeGameDeals = () => {
     const [deals, setDeals] = useState<Deal[]>([]);
     const [visibleDeals, setVisibleDeals] = useState<Deal[]>([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const dealsPerPage = 5;
+    const dealsPerPage = 10;
 
     useEffect(() => {
         fetchFreeGameDeals().then((data) => {
@@ -60,7 +60,7 @@ const FreeGameDeals = () => {
                     <div className="text-center mt-4">
                         <button
                             onClick={loadMoreDeals}
-                            className="btn btn-primary mt-4 mb-12"
+                            className="btn btn-primary mt-4 mb-12 text-white"
                         >
                             Load More
                         </button>

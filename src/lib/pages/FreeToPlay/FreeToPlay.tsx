@@ -60,7 +60,7 @@ const FreeToPlay = () => {
                     <div className="text-center mt-4">
                         <button
                             onClick={loadMoreDeals}
-                            className="btn btn-primary mt-4 mb-12"
+                            className="btn btn-primary mt-4 mb-12 text-white"
                         >
                             Load More
                         </button>

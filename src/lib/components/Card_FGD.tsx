@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 
 interface Deal {
     title: string;
@@ -33,13 +34,16 @@ const Card_FGD = ({ deal }: { deal: Deal }) => {
 
     return (
         <>
-            <div className="card lg:card-side bg-base-100 shadow-xl border-2 border-neutral p-4">
-                <figure>
+            <div className="card lg:card-side bg-base-100 shadow-xl border-2 border-neutral">
+                <figure className="px-8">
                     {!imageLoaded && (
                         <div className="skeleton w-[460px] h-[215px] shrink-0"></div>
                     )}
                     {imageLoaded && (
-                        <img
+                        <motion.img
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ delay: 0.2 }}
                             src={deal.image}
                             alt="Cover Image"
                             className={"rounded-xl"}
