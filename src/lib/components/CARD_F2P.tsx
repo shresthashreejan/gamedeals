@@ -31,7 +31,7 @@ const Card_F2P = ({ deal }: { deal: Deal }) => {
 
     return (
         <>
-            <div className="card w-96 bg-base-100 shadow-xl">
+            <div className="card w-96 bg-base-100 shadow-xl border-2 border-neutral p-4">
                 <figure>
                     {!imageLoaded && (
                         <div className="skeleton w-[365px] h-[206px] shrink-0"></div>
@@ -44,9 +44,9 @@ const Card_F2P = ({ deal }: { deal: Deal }) => {
                         />
                     )}
                 </figure>
-                <div className="card-body flex flex-col justify-center">
+                <div className="card-body">
                     <h2 className="card-title">{deal.title}</h2>
-                    <div className="flex flex-wrap gap-1">
+                    <div className="flex flex-wrap gap-2">
                         {platformsArray &&
                             platformsArray.map((platform, index) => (
                                 <div
@@ -59,7 +59,7 @@ const Card_F2P = ({ deal }: { deal: Deal }) => {
                     </div>
                     <div className="card-actions justify-start">
                         <button
-                            className="btn btn-primary mt-4"
+                            className="btn btn-primary mt-4 text-white"
                             onClick={() => {
                                 redirectTo(deal.game_url);
                             }}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 interface TabsProps {
     activeTab: number;
@@ -6,6 +6,17 @@ interface TabsProps {
 }
 
 const Tabs: React.FC<TabsProps> = ({ activeTab, onTabChange }) => {
+    const [isDarkTheme, setIsDarkTheme] = useState<boolean>(true);
+    let darkThemeTextColor;
+
+    useEffect(() => {
+        setIsDarkTheme((prevState) => !prevState);
+    }, [document.documentElement.getAttribute("data-theme")]);
+
+    useEffect(() => {
+        darkThemeTextColor = isDarkTheme ? "text-white" : "text-black";
+    }, [isDarkTheme]);
+
     return (
         <div className="relative">
             <div role="tablist" className="tabs tabs-boxed">
@@ -16,7 +27,15 @@ const Tabs: React.FC<TabsProps> = ({ activeTab, onTabChange }) => {
                     } transition-all`}
                     onClick={() => onTabChange(0)}
                 >
-                    Free Game Deals
+                    <div
+                        className={`uppercase text-lg ${
+                            activeTab === 0
+                                ? "text-white"
+                                : `${darkThemeTextColor}`
+                        }`}
+                    >
+                        Free Game Deals
+                    </div>
                 </a>
                 <a
                     role="tab"
@@ -25,7 +44,15 @@ const Tabs: React.FC<TabsProps> = ({ activeTab, onTabChange }) => {
                     } transition-all`}
                     onClick={() => onTabChange(1)}
                 >
-                    Free To Play Games
+                    <div
+                        className={`uppercase text-lg ${
+                            activeTab === 1
+                                ? "text-white"
+                                : `${darkThemeTextColor}`
+                        }`}
+                    >
+                        Free To Play Games
+                    </div>
                 </a>
                 <a
                     role="tab"
@@ -34,7 +61,15 @@ const Tabs: React.FC<TabsProps> = ({ activeTab, onTabChange }) => {
                     } transition-all`}
                     onClick={() => onTabChange(2)}
                 >
-                    Game Recommendation
+                    <div
+                        className={`uppercase text-lg ${
+                            activeTab === 2
+                                ? "text-white"
+                                : `${darkThemeTextColor}`
+                        }`}
+                    >
+                        Game Recommendation
+                    </div>
                 </a>
             </div>
         </div>

@@ -3,7 +3,7 @@ function ThemeToggle() {
 
     function toggleTheme() {
         isDarkTheme = !isDarkTheme;
-        const theme = isDarkTheme ? "dark" : "retro";
+        const theme = isDarkTheme ? "night" : "cmyk";
         document.documentElement.setAttribute("data-theme", theme);
     }
     return (
