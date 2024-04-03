@@ -6,7 +6,6 @@ import GameRecommendation from "../GameRecommendation/GameRecommendation";
 import Navbar from "../../components/Navbar";
 import Tabs from "../../components/Tabs";
 import ThemeToggle from "../../components/ThemeToggle";
-import Attribution from "../../components/Attribution";
 import Footer from "../../components/Footer";
 
 const Home = () => {
@@ -29,19 +28,6 @@ const Home = () => {
                 }}
             >
                 <ThemeToggle />
-            </motion.div>
-            <motion.div
-                className="absolute top-20 right-4 overflow-hidden"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{
-                    delay: 0.5,
-                    type: "spring",
-                    stiffness: 260,
-                    damping: 20,
-                }}
-            >
-                <Attribution />
             </motion.div>
             <header className="mt-12 text-6xl uppercase">
                 <motion.div
