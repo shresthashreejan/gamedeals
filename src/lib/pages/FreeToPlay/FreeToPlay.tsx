@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { fetchFreeToPlayGames } from "../../utils/FetchFreeToPlay";
 import Card_F2P from "../../components/CARD_F2P";
 
@@ -9,7 +9,11 @@ interface Deal {
     thumbnail: string;
 }
 
-const FreeToPlay = () => {
+interface Props {
+    searchQuery: string;
+}
+
+const FreeToPlay: React.FC<Props> = ({ searchQuery }) => {
     const [loading, setLoading] = useState(true);
     const [deals, setDeals] = useState<Deal[]>([]);
     const [visibleDeals, setVisibleDeals] = useState<Deal[]>([]);
@@ -26,6 +30,22 @@ const FreeToPlay = () => {
             setLoading(false);
         });
     }, []);
+
+    useEffect(() => {
+        if (searchQuery) {
+            filterDeals(searchQuery);
+        } else {
+            setVisibleDeals(deals.slice(0, dealsPerPage));
+        }
+    }, [searchQuery]);
+
+    const filterDeals = (query: string) => {
+        const filteredDeals = deals.filter((deal) =>
+            deal.title.toLowerCase().includes(query.toLowerCase())
+        );
+        setVisibleDeals(filteredDeals);
+        setCurrentPage(1);
+    };
 
     const loadMoreDeals = () => {
         const nextPageDeals = deals.slice(
@@ -56,16 +76,18 @@ const FreeToPlay = () => {
                     ))}
             </div>
             <div>
-                {!loading && visibleDeals.length < deals.length && (
-                    <div className="text-center mt-4">
-                        <button
-                            onClick={loadMoreDeals}
-                            className="btn btn-primary mt-4 mb-12 text-white"
-                        >
-                            Load More
-                        </button>
-                    </div>
-                )}
+                {!loading &&
+                    visibleDeals.length < deals.length &&
+                    visibleDeals.length !== 0 && (
+                        <div className="text-center mt-4">
+                            <button
+                                onClick={loadMoreDeals}
+                                className="btn btn-primary mt-4 mb-12 text-white"
+                            >
+                                Load More
+                            </button>
+                        </div>
+                    )}
             </div>
         </>
     );

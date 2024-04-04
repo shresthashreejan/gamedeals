@@ -7,8 +7,11 @@ import Navbar from "../../components/Navbar";
 import Tabs from "../../components/Tabs";
 import ThemeToggle from "../../components/ThemeToggle";
 import Footer from "../../components/Footer";
+import SearchBar from "../../components/SearchBar";
+import Attribution from "../../components/Attribution";
 
 const Home = () => {
+    const [searchQuery, setSearchQuery] = useState("");
     const [activeTab, setActiveTab] = useState<number>(0);
     const handleTabChange = (index: number) => {
         setActiveTab(index);
@@ -28,6 +31,19 @@ const Home = () => {
                 }}
             >
                 <ThemeToggle />
+            </motion.div>
+            <motion.div
+                className="absolute top-20 right-4 overflow-hidden"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{
+                    delay: 0.5,
+                    type: "spring",
+                    stiffness: 260,
+                    damping: 20,
+                }}
+            >
+                <Attribution />
             </motion.div>
             <header className="mt-12 text-6xl uppercase">
                 <motion.div
@@ -49,6 +65,9 @@ const Home = () => {
                             activeTab={activeTab}
                             onTabChange={handleTabChange}
                         />
+                        <div className="mt-4">
+                            <SearchBar onSearch={setSearchQuery} />
+                        </div>
                     </motion.div>
                 </div>
                 <section className="mt-12">
@@ -57,7 +76,7 @@ const Home = () => {
                             initial={{ opacity: 0, y: 100 }}
                             animate={{ opacity: 1, y: 0 }}
                         >
-                            <FreeGameDeals />
+                            <FreeGameDeals searchQuery={searchQuery} />
                         </motion.div>
                     )}
                     {activeTab === 1 && (
@@ -65,7 +84,7 @@ const Home = () => {
                             initial={{ opacity: 0, y: 100 }}
                             animate={{ opacity: 1, y: 0 }}
                         >
-                            <FreeToPlay />
+                            <FreeToPlay searchQuery={searchQuery} />
                         </motion.div>
                     )}
                     {activeTab === 2 && (
