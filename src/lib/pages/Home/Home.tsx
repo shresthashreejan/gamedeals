@@ -2,11 +2,9 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import FreeGameDeals from "../FreeGameDeals/FreeGameDeals";
 import FreeToPlay from "../FreeToPlay/FreeToPlay";
-import GameRecommendation from "../GameRecommendation/GameRecommendation";
 import Navbar from "../../components/Navbar";
 import Tabs from "../../components/Tabs";
 import ThemeToggle from "../../components/ThemeToggle";
-import Footer from "../../components/Footer";
 import SearchBar from "../../components/SearchBar";
 import Attribution from "../../components/Attribution";
 
@@ -87,16 +85,8 @@ const Home = () => {
                             <FreeToPlay searchQuery={searchQuery} />
                         </motion.div>
                     )}
-                    {activeTab === 2 && (
-                        <div>
-                            <GameRecommendation />
-                        </div>
-                    )}
                 </section>
             </main>
-            <div className="flex justify-center">
-                <Footer />
-            </div>
         </>
     );
 };

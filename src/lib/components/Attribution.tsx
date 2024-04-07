@@ -1,3 +1,5 @@
+import Footer from "./Footer";
+
 function openModal() {
     const modal = document.getElementById("attribution-modal");
     if (modal instanceof HTMLDialogElement) {
@@ -28,26 +30,20 @@ const Attribution = () => {
             </button>
             <dialog id="attribution-modal" className="modal">
                 <div className="modal-box flex flex-col justify-center items-center">
-                    <h1 className=" font-bold text-3xl uppercase">
+                    <h1 className=" font-bold text-3xl uppercase pb-4">
                         Attribution
                     </h1>
-                    <p className="py-4">
-                        Powered by{" "}
-                        <a
-                            href="https://www.gamerpower.com/"
-                            className=" underline"
-                        >
-                            GamerPower
-                        </a>{" "}
-                        and{" "}
-                        <a
-                            href="https://www.freetogame.com/"
-                            className=" underline"
-                        >
-                            FreeToGame
-                        </a>
-                        !
-                    </p>
+                    <div>
+                        <Footer />
+                        <p className="pb-4">
+                            Powered by{" "}
+                            <a href="https://www.gamerpower.com/">GamerPower</a>{" "}
+                            and{" "}
+                            <a href="https://www.freetogame.com/">
+                                FreeToGame!
+                            </a>
+                        </p>
+                    </div>
                 </div>
                 <form method="dialog" className="modal-backdrop">
                     <button>close</button>

@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+    scrollbar-width: thin;
+}
+
 * {
     font-family: "IBM Plex Mono", monospace;
     font-weight: 400;

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { motion } from "framer-motion";
 import { fetchFreeToPlayGames } from "../../utils/FetchFreeToPlay";
 import Card_F2P from "../../components/CARD_F2P";
 
@@ -22,15 +21,17 @@ const FreeToPlay: React.FC<Props> = ({ searchQuery }) => {
     const [selectedPlatform, setSelectedPlatform] = useState<string | null>(
         null
     );
-    const [filterUsed, setFilterUsed] = useState<boolean>(false);
     const dealsPerPage = 20;
 
     useEffect(() => {
         setLoading(true);
-        fetchFreeToPlayGames().then((data) => {
+        fetchFreeToPlayGames().then((data: Deal[]) => {
             if (data) {
-                setDeals(data);
-                setVisibleDeals(data.slice(0, dealsPerPage));
+                const filteredData = data.filter(
+                    (deal) => deal.platform.toLowerCase() !== "web browser"
+                );
+                setDeals(filteredData);
+                setVisibleDeals(filteredData.slice(0, dealsPerPage));
             }
             setLoading(false);
         });
@@ -74,89 +75,8 @@ const FreeToPlay: React.FC<Props> = ({ searchQuery }) => {
         setCurrentPage(currentPage + 1);
     };
 
-    const uniquePlatforms: string[] = Array.from(
-        new Set(
-            deals.flatMap((deal) =>
-                deal.platform.split(",").map((platform) => platform.trim())
-            )
-        )
-    );
-
-    const clearFilters = () => {
-        setSelectedPlatform(null);
-        setVisibleDeals(deals.slice(0, dealsPerPage));
-    };
-
-    useEffect(() => {
-        if (selectedPlatform !== null) {
-            setFilterUsed(true);
-        } else {
-            setFilterUsed(false);
-        }
-    }, [selectedPlatform]);
-
     return (
         <>
-            {!loading && uniquePlatforms.length > 0 && (
-                <motion.div
-                    className="absolute top-36 right-4 dropdown dropdown-left dropdown-start"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{
-                        delay: 0.5,
-                        type: "spring",
-                        stiffness: 260,
-                        damping: 20,
-                    }}
-                >
-                    <button className="btn btn-circle" tabIndex={0}>
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="3"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                        >
-                            <line x1="4" y1="21" x2="4" y2="14"></line>
-                            <line x1="4" y1="10" x2="4" y2="3"></line>
-                            <line x1="12" y1="21" x2="12" y2="12"></line>
-                            <line x1="12" y1="8" x2="12" y2="3"></line>
-                            <line x1="20" y1="21" x2="20" y2="16"></line>
-                            <line x1="20" y1="12" x2="20" y2="3"></line>
-                            <line x1="1" y1="14" x2="7" y2="14"></line>
-                            <line x1="9" y1="8" x2="15" y2="8"></line>
-                            <line x1="17" y1="16" x2="23" y2="16"></line>
-                        </svg>
-                    </button>
-                    <ul
-                        tabIndex={0}
-                        className="dropdown-content z-[1] menu p-2 shadow-xl bg-base-100 rounded-box w-52"
-                    >
-                        {uniquePlatforms.map((platform, index) => (
-                            <li>
-                                <a
-                                    key={index}
-                                    onClick={() =>
-                                        setSelectedPlatform(platform)
-                                    }
-                                >
-                                    {platform}
-                                </a>
-                            </li>
-                        ))}
-                        {filterUsed && (
-                            <li>
-                                {" "}
-                                <a onClick={clearFilters}>Clear Filters</a>
-                            </li>
-                        )}
-                    </ul>
-                </motion.div>
-            )}
             <div className="flex flex-wrap justify-center">
                 {loading && (
                     <div className="spinner">

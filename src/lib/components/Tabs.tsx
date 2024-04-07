@@ -54,23 +54,6 @@ const Tabs: React.FC<TabsProps> = ({ activeTab, onTabChange }) => {
                         Free To Play Games
                     </div>
                 </a>
-                <a
-                    role="tab"
-                    className={`tab ${
-                        activeTab === 2 ? "tab-active" : ""
-                    } transition-all`}
-                    onClick={() => onTabChange(2)}
-                >
-                    <div
-                        className={`uppercase text-lg ${
-                            activeTab === 2
-                                ? "text-white"
-                                : `${darkThemeTextColor}`
-                        }`}
-                    >
-                        Game Recommendation
-                    </div>
-                </a>
             </div>
         </div>
     );

@@ -1,8 +1,8 @@
 const Footer = () => {
     return (
         <>
-            <div className="bottom-0 py-4 italic">
-                developed by{" "}
+            <div>
+                Developed by{" "}
                 <a href="https://github.com/shresthashreejan">shreejan</a>
             </div>
         </>
